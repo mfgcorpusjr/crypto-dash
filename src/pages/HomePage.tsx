@@ -26,13 +26,17 @@ export default function HomePage() {
         );
 
         if (!response.ok) {
-          throw new Error("Failed to fetch");
+          throw new Error("Failed to fetch: Too Many Requests");
         }
 
         const data = await response.json();
         setCoins(data);
       } catch (error) {
-        setError(error instanceof Error ? error.message : "Failed to fetch");
+        setError(
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch: Too Many Requests"
+        );
       } finally {
         setIsLoading(false);
       }

@@ -39,7 +39,10 @@ export default function CoinListItem({ coin }: CoinListItemProps) {
             >
               {coin.price_change_percentage_24h} %
             </div>
-            <div>Market Cap: {coin.market_cap?.toLocaleString() ?? "N/A"}</div>
+            <div>
+              Market Cap:{" "}
+              {coin.market_cap ? coin.market_cap.toLocaleString() : "N/A"}
+            </div>
           </div>
         </CardContent>
       </Card>
