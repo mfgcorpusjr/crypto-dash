@@ -8,11 +8,8 @@ import { type Coin } from "@/types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-// TODO: delete this later
-import { DUMMY_COINS } from "@/data";
-
 export default function HomePage() {
-  const [coins, setCoins] = useState<Coin[]>(DUMMY_COINS);
+  const [coins, setCoins] = useState<Coin[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -29,7 +26,7 @@ export default function HomePage() {
         );
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error("Failed to fetch");
         }
 
         const data = await response.json();
@@ -41,7 +38,7 @@ export default function HomePage() {
       }
     };
 
-    // getCoins();
+    getCoins();
   }, [debouncedSearch, limit, filter]);
 
   return (
@@ -55,7 +52,7 @@ export default function HomePage() {
         setFilter={setFilter}
       />
 
-      <CoinList coins={coins} />
+      <CoinList coins={coins} isLoading={isLoading} error={error} />
     </div>
   );
 }

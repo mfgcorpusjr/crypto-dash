@@ -21,7 +21,12 @@ export default function CoinListItem({ coin }: CoinListItemProps) {
         </div>
 
         <div className="text-sm">
-          <div>Price: ${coin.current_price.toLocaleString()}</div>
+          <div>
+            Price:{" "}
+            {coin.current_price
+              ? `$${coin.current_price.toLocaleString()}`
+              : "N/A"}
+          </div>
           <div
             className={`${
               coin.price_change_percentage_24h >= 0
@@ -31,7 +36,7 @@ export default function CoinListItem({ coin }: CoinListItemProps) {
           >
             {coin.price_change_percentage_24h} %
           </div>
-          <div>Market Cap: {coin.market_cap.toLocaleString()}</div>
+          <div>Market Cap: {coin.market_cap?.toLocaleString() ?? "N/A"}</div>
         </div>
       </CardContent>
     </Card>
