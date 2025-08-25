@@ -21,17 +21,13 @@ export default function CoinDetailsPage() {
         const response = await fetch(`${API_URL}/${id}`);
 
         if (!response.ok) {
-          throw new Error("Failed to fetch: Too Many Requests");
+          throw new Error("Failed to fetch");
         }
 
         const data = await response.json();
         setCoin(data);
       } catch (error) {
-        setError(
-          error instanceof Error
-            ? error.message
-            : "Failed to fetch: Too Many Requests"
-        );
+        setError(error instanceof Error ? error.message : "Failed to fetch");
       } finally {
         setIsLoading(false);
       }
