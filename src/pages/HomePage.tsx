@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useDebounce } from "use-debounce";
 
+import CoinControls from "@/components/CoinControls";
 import CoinList from "@/components/CoinList";
 
 import { type Coin } from "@/types";
@@ -11,20 +13,48 @@ import { DUMMY_COINS } from "@/data";
 
 export default function HomePage() {
   const [coins, setCoins] = useState<Coin[]>(DUMMY_COINS);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const [search, setSearch] = useState("");
+  const [debouncedSearch] = useDebounce(search, 1000);
+  const [limit, setLimit] = useState("10");
+  const [filter, setFilter] = useState("market_cap_desc");
 
   useEffect(() => {
-    // const getCoins = async () => {
-    //   const response = await fetch(
-    //     `${API_URL}/markets?vs_currency=usd&per_page=10`
-    //   );
-    //   const data = await response.json();
-    //   console.log(data);
-    // };
+    const getCoins = async () => {
+      try {
+        const response = await fetch(
+          `${API_URL}/markets?vs_currency=usd&names=${debouncedSearch}&per_page=${limit}&order=${filter}`
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setCoins(data);
+      } catch (error) {
+        setError(error instanceof Error ? error.message : "Failed to fetch");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     // getCoins();
-  }, []);
+  }, [debouncedSearch, limit, filter]);
 
   return (
-    <div className="container mx-auto p-8">
+    <div className="container mx-auto p-8 space-y-8">
+      <CoinControls
+        search={search}
+        setSearch={setSearch}
+        limit={limit}
+        setLimit={setLimit}
+        filter={filter}
+        setFilter={setFilter}
+      />
+
       <CoinList coins={coins} />
     </div>
   );

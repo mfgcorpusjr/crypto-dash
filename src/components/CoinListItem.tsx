@@ -8,7 +8,7 @@ type CoinListItemProps = {
 
 export default function CoinListItem({ coin }: CoinListItemProps) {
   return (
-    <Card>
+    <Card className="transition-transform hover:-translate-y-2 duration-300">
       <CardContent className="space-y-4">
         <div className="flex items-center gap-4">
           <img src={coin.image} alt={coin.name} className="w-10" />
