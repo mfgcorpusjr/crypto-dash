@@ -4,12 +4,12 @@ import { useDebounce } from "use-debounce";
 import CoinControls from "@/components/CoinControls";
 import CoinList from "@/components/CoinList";
 
-import { type Coin } from "@/types";
+import { type CoinListItem } from "@/types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function HomePage() {
-  const [coins, setCoins] = useState<Coin[]>([]);
+  const [coins, setCoins] = useState<CoinListItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 

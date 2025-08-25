@@ -2,10 +2,10 @@ import { BarLoader } from "react-spinners";
 
 import CoinListItem from "@/components/CoinListItem";
 
-import { type Coin } from "@/types";
+import { type CoinListItem as TCoinListItem } from "@/types";
 
 type CoinListProps = {
-  coins: Coin[];
+  coins: TCoinListItem[];
   isLoading: boolean;
   error: string;
 };
