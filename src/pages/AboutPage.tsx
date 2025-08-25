@@ -5,7 +5,7 @@ export default function AboutPage() {
     <div className="p-8">
       <Card className="max-w-lg mx-auto">
         <CardContent className="space-y-8">
-          <h1 className="text-2xl font-bold">About Crypto Dash</h1>
+          <h2 className="text-2xl font-bold">About Crypto Dash</h2>
 
           <p className="text-sm">
             Crypto Dash is a simple React application that displays live
