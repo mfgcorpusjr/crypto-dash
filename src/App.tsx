@@ -1,3 +1,9 @@
+import { ThemeProvider } from "@/providers/ThemeProvider";
+
 export default function App() {
-  return <div>App</div>;
+  return (
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div>App</div>
+    </ThemeProvider>
+  );
 }
